@@ -1,0 +1,10 @@
+C:\Users\cd\source\repos\mineSweeper\bin\Debug\mineSweeper.exe.config
+C:\Users\cd\source\repos\mineSweeper\bin\Debug\mineSweeper.exe
+C:\Users\cd\source\repos\mineSweeper\bin\Debug\mineSweeper.pdb
+C:\Users\cd\source\repos\mineSweeper\obj\Debug\mineSweeper.csprojAssemblyReference.cache
+C:\Users\cd\source\repos\mineSweeper\obj\Debug\mineSweeper.Properties.Resources.resources
+C:\Users\cd\source\repos\mineSweeper\obj\Debug\mineSweeper.csproj.GenerateResource.cache
+C:\Users\cd\source\repos\mineSweeper\obj\Debug\mineSweeper.csproj.CoreCompileInputs.cache
+C:\Users\cd\source\repos\mineSweeper\obj\Debug\mineSweeper.exe
+C:\Users\cd\source\repos\mineSweeper\obj\Debug\mineSweeper.pdb
+C:\Users\cd\source\repos\mineSweeper\obj\Debug\mineSweeper.GameForm.resources
