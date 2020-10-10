@@ -9,19 +9,30 @@ namespace mineSweeper
 {
     public partial class GameForm : Form
     {
-        private readonly int _SizeOfSquare = 25;
+        private readonly int _SizeOfCell = 25;
         static List<Tiles> images = new List<Tiles>();
 
         bool isLoose = false;
-
+        /// <summary>
+        /// how many bombs
+        /// </summary>
         int countOfBomb;
+        /// <summary>
+        /// how many cells are selected
+        /// </summary>
         int currentCount;
+        /// <summary>
+        /// how many bombs are guessed
+        /// </summary>
         int correctCount;
+
+        int _n = 20;
+        int _bomb = 25;
 
         public GameForm()
         {
             InitializeComponent();
-            _Genmap(20, 25);
+            _Genmap(_n, _bomb);
             MessageBox.Show("Left click - open the cell, Right click - mark the cells");
         }
 
@@ -31,38 +42,38 @@ namespace mineSweeper
         /// Генерация карты.
         /// </summary>
         /// <param name="N">Размер поля NxN</param>
-        /// <param name="count">Количество бомб на поле</param>
-        void _Genmap(int N, int count)
+        /// <param name="howManyBombsGenerate">Количество бомб на поле</param>
+        void _Genmap(int N, int howManyBombsGenerate)
         {
             #region Дизайн формы
 
             //Размеры формы
-            ClientSize = new Size(N * _SizeOfSquare, N * _SizeOfSquare);
+            ClientSize = new Size(N * _SizeOfCell, N * _SizeOfCell);
 
             //MaximumSize = new Size(Width, Height);
             //MinimumSize = new Size(Width, Height);
 
             //Размеры сетки
-            int _Widht = _SizeOfSquare * N;
-            int _Height = _SizeOfSquare * N;
+            int _Widht = _SizeOfCell * N;
+            int _Height = _SizeOfCell * N;
 
             //Генерация сетки
-            for (int i = 0; i <= _Height / _SizeOfSquare; i++)
+            for (int i = 0; i <= _Height / _SizeOfCell; i++)
             {
                 PictureBox field = new PictureBox
                 {
                     Size = new Size(_Widht, 1),
-                    Location = new Point(0, _SizeOfSquare * i),
+                    Location = new Point(0, _SizeOfCell * i),
                     BackColor = Color.Green
                 };
                 Controls.Add(field);
             }
-            for (int i = 0; i <= _Widht / _SizeOfSquare; i++)
+            for (int i = 0; i <= _Widht / _SizeOfCell; i++)
             {
                 PictureBox field = new PictureBox
                 {
                     Size = new Size(1, _Height),
-                    Location = new Point(_SizeOfSquare * i, 0),
+                    Location = new Point(_SizeOfCell * i, 0),
                     BackColor = Color.Green
                 };
                 Controls.Add(field);
@@ -70,12 +81,12 @@ namespace mineSweeper
             #endregion
 
             #region Генерация бомб
-            countOfBomb = count;
+            countOfBomb = howManyBombsGenerate;
 
             //Рандомные точки
             List<int> ind = new List<int>();
             Random rnd = new Random();
-            for (int i = 1; i <= count; i++)
+            for (int i = 1; i <= howManyBombsGenerate; i++)
             {
                 int temp = rnd.Next(0, N * N);
                 if (isCellIsBomb(ind, temp))
@@ -105,8 +116,8 @@ namespace mineSweeper
 
                     PictureBox field = new PictureBox
                     {
-                        Size = new Size(_SizeOfSquare, _SizeOfSquare),
-                        Location = new Point(i * _SizeOfSquare, j * _SizeOfSquare)
+                        Size = new Size(_SizeOfCell, _SizeOfCell),
+                        Location = new Point(i * _SizeOfCell, j * _SizeOfCell)
                     };
 
                     field.AccessibleDefaultActionDescription = "" + p;
@@ -166,11 +177,12 @@ namespace mineSweeper
                     {
                         if (!t.IsMarked)
                         {
-                            if (currentCount < countOfBomb) { 
+                            if (currentCount < countOfBomb)
+                            {
                                 t.IsMarked = !t.IsMarked;
-                            currentCount++;
-                            if (t.isBomb)
-                                correctCount++;
+                                currentCount++;
+                                if (t.isBomb)
+                                    correctCount++;
                             }
                         }
                         else
